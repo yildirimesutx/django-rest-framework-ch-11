@@ -1,6 +1,6 @@
 # Django REST Framework
 
-Bu projedeki amacımız Django Rest Framework'u olusturacagımız 5 app ile ozetlemek. 
+Bu projedeki amacımız Django Rest Framework'u, olusturacagımız 5 app ile ozetlemek. 
 
 
 
