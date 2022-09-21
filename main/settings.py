@@ -42,6 +42,7 @@ INSTALLED_APPS = [
      #my_app
      'app_1',
      "app_2",
+     "app_3",
 
      #third party
      'rest_framework',
