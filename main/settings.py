@@ -43,9 +43,11 @@ INSTALLED_APPS = [
      'app_1',
      "app_2",
      "app_3",
+     "app_4",
 
      #third party
      'rest_framework',
+     "django_filters",
 
 
 ]
@@ -132,3 +134,31 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# REST_FRAMEWORK = {
+#     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+#     'PAGE_SIZE': 10
+# }
+
+
+# REST_FRAMEWORK = {
+#     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination'
+# }
+
+# need "created" column in database (for default settings)
+# REST_FRAMEWORK = {
+#     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.CursorPagination',
+#     'PAGE_SIZE': 100
+# }
+
+REST_FRAMEWORK = {
+    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    # 'PAGE_SIZE': 10,
+    
+      'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend', # pip install django-filter # add to INSTALLED_APPS
+        # 'rest_framework.filters.SearchFilter', # Global settings for Search
+        # 'rest_framework.filters.OrderingFilter', # Global settings for Ordering
+    ]
+
+}

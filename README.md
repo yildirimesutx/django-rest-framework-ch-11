@@ -6,7 +6,8 @@ Bu projedeki amacımız Django Rest Framework'u, olusturacagımız 5 app ile oze
 app_1 => serializers, relation field
 app_2 => FBV
 app_3 => CBV
-
+app_4 => Pagination, filter, search
+ 
 
 
 
@@ -428,6 +429,87 @@ class TodoSerializer(serializers.ModelSerializer):
         model= Todo
         fields = ("id", "task","description","priority", "done", "todo_detail" ,  "updateDate", "createdDate" )
 
+
+
+```
+
+
+**app_4 Pagination, filter, search**
+
+-Global ve local ayarlar yapabiliyoruz.
+
+
+- Global olarak  asagidaki kodu settings.py yazıyoruz. 200 adet gelen veriyi 10 sayfaya bölüyor. Global tüm modelleri etkiler 
+
+```
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
+}
+```
+
+
+- local
+
+
+```
+pagination.py 
+
+from rest_framework.pagination import PageNumberPagination
+
+
+# PageNumberPagination classını inherit ediyoruz ve yeni class farklı isimlendirebiliriz
+# page_size bu inherit edilen class in attributi 
+class SmallPageNumberPagination(PageNumberPagination):
+    page_size = 8
+
+
+views.py =>
+
+ilgili modelde çağırdık,
+
+class StudentMVS(ModelViewSet):
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializer
+    pagination_class = SmallPageNumberPagination
+
+```
+
+
+- Limit Offset- global
+
+- limit offet için settings.py
+
+
+```
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination'
+}
+
+
+
+http://127.0.0.1:8000/psf/api/?limit=10  urlde sorguluyoruz, ilk 10 kayıdı getiriyor
+
+
+http://127.0.0.1:8000/psf/api/?limit=10&offset=15  ilk 15 den sonra 10 kayıdı getir
+```
+
+
+
+- limit-offset local
+
+```
+pagination.py
+
+class MyLimitOffsetPagination(LimitOffsetPagination):
+    default_limit = 3   
+
+class StudentMVS(ModelViewSet):
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializer
+    # pagination_class = SmallPageNumberPagination
+    pagination_class = MyLimitOffsetPagination
 
 
 ```
