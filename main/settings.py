@@ -44,10 +44,12 @@ INSTALLED_APPS = [
      "app_2",
      "app_3",
      "app_4",
+     "app_5",
 
      #third party
      'rest_framework',
      "django_filters",
+     'rest_framework.authtoken',
 
 
 ]
@@ -151,14 +153,23 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #     'PAGE_SIZE': 100
 # }
 
-REST_FRAMEWORK = {
-    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    # 'PAGE_SIZE': 10,
+# REST_FRAMEWORK = {
+#     # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+#     # 'PAGE_SIZE': 10,
     
-      'DEFAULT_FILTER_BACKENDS': [
-        'django_filters.rest_framework.DjangoFilterBackend', # pip install django-filter # add to INSTALLED_APPS
-        # 'rest_framework.filters.SearchFilter', # Global settings for Search
-        # 'rest_framework.filters.OrderingFilter', # Global settings for Ordering
-    ]
+#       'DEFAULT_FILTER_BACKENDS': [
+#         'django_filters.rest_framework.DjangoFilterBackend', # pip install django-filter # add to INSTALLED_APPS
+#         # 'rest_framework.filters.SearchFilter', # Global settings for Search
+#         # 'rest_framework.filters.OrderingFilter', # Global settings for Ordering
+#     ]
 
+# }
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        # 'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+       
+    ]
 }

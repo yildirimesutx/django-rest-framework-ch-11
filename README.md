@@ -513,3 +513,45 @@ class StudentMVS(ModelViewSet):
 
 
 ```
+
+
+**app_5 Permission and Authentication**
+
+
+
+- permission kullanıclara verilen yetki dahilinde belirli işlemlerin yapılabilmesini sağlıyor, örnek olarak, kayıtlı bir user listeleme yapabilsin, admin ise post edebilsin gibi, 
+
+- https://www.django-rest-framework.org/api-guide/permissions/
+
+
+- localde uygulama;
+
+     ``` 
+     views.py =>
+      
+    from rest_framework.permissions import IsAuthenticated # ilgili permission import ettik 
+
+
+    class StudentList(generics.ListCreateAPIView):
+        serializer_class = StudentSerializer
+        queryset = Student.objects.all()
+        permission_classes = [IsAuthenticated]
+        (#burada cagirdik)
+
+
+
+     
+     ```
+
+- BasicAuthetication kullanarak test ettik 
+
+```
+     settings.py
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+       
+    ]
+}
+```

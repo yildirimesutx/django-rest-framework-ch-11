@@ -21,5 +21,6 @@ urlpatterns = [
     path("", include("app_1.urls")),
     path("todo/", include("app_2.urls")),
     path("cbv/", include("app_3.urls")),
-    path("psf/", include("app_4.urls"))
+    path("psf/", include("app_4.urls")),
+    path("user/", include("app_5.urls"))
 ]
