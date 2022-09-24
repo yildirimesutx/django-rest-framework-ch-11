@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 
-from .models import Todo
-from .serializers import TodoSerializers
+from .models import Todo, Category
+from .serializers import TodoSerializers, CategorySerializers
 
 # Create your views here.
 from rest_framework.views import APIView
@@ -109,3 +109,17 @@ class TodoMVS(viewsets.ModelViewSet):
         'undo-todos': todo_count
     }
         return Response(count)
+
+
+
+
+class CategoryListCreate(ListCreateAPIView):
+    queryset = Category.objects.all()
+    serializer_class= CategorySerializers
+
+
+
+class CategoryGetUpdateDelete(RetrieveUpdateDestroyAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializers
+    lookup_field = "id" 

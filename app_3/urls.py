@@ -5,6 +5,9 @@ from .views import (
     # TodoListCreate,
     # TodoGetUpdateDelete
     TodoMVS,
+    CategoryListCreate,
+    CategoryGetUpdateDelete
+
 )
 
 from rest_framework import routers
@@ -20,6 +23,8 @@ urlpatterns = [
     # path("list", TodoListCreate.as_view()),
     # path("detail/<int:id>", TodoGetUpdateDelete.as_view()),
     # path("api" include(router.urls))
+    path("category/",CategoryListCreate.as_view()),
+    path("category/<int:id>", CategoryGetUpdateDelete.as_view())
    
 ]
 
